@@ -1,7 +1,8 @@
 asgiref==3.7.2
 attrs==23.2.0
+coverage==7.4.3
 Django==5.0.2
-git+https://github.com/paulocheque/django-dynamic-fixture.git@eb4424798bb6ba60c3eab5ca1a23f86891051516#egg=django_dynamic_fixture
+django-dynamic-fixture @ git+https://github.com/paulocheque/django-dynamic-fixture.git@eb4424798bb6ba60c3eab5ca1a23f86891051516
 djangorestframework==3.14.0
 inflection==0.3.1
 iniconfig==2.0.0
@@ -12,6 +13,7 @@ pluggy==1.4.0
 pytest==7.4.4
 pytest-assert-utils==0.3.1
 pytest-common-subject==1.0.6
+pytest-cov==4.1.0
 pytest-django==4.8.0
 pytest-drf==1.1.3
 pytest-fixture-order==0.1.4
