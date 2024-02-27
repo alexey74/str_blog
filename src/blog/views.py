@@ -1,5 +1,7 @@
 """Module providing views for the Blog app."""
 
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import PageNumberPagination
 
@@ -17,3 +19,7 @@ class CommentModelViewSet(ModelViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
     pagination_class = PageNumberPagination
+
+
+def index(request: HttpRequest) -> HttpResponse:
+    return render(request, 'index.djhtml')

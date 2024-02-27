@@ -22,18 +22,13 @@ from rest_framework.authtoken.models import Token
 from django.conf import settings
 
 from blog.models import Post
-
+from blog.serializers import PostSerializer
 
 User = get_user_model()
 
 
 def express_post(post: Post) -> Dict[str, Any]:
-    return {
-        "id": post.id,
-        "user_id": post.user_id,
-        "title": post.title,
-        "body": post.body,
-    }
+    return PostSerializer(post).data
 
 
 express_posts = pluralized(express_post)
@@ -41,9 +36,7 @@ express_posts = pluralized(express_post)
 
 @pytest.fixture
 def admuser():
-    user = G(User)
-    G(Token, user=user)
-    return User
+    return G(User)
 
 
 @pytest.mark.django_db

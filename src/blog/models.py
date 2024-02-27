@@ -3,8 +3,10 @@
 from django.db import models
 from django.conf import settings
 
+from .abstract_models import TimeStampedModel
 
-class Post(models.Model):
+
+class Post(TimeStampedModel):
     """Blog post model."""
 
     # TODO: use a FK here
@@ -19,13 +21,13 @@ class Post(models.Model):
     body = models.TextField(help_text="Full content of this blog post")
 
     class Meta:
-        ordering = ['pk']
+        ordering = ["pk"]
 
     def __str__(self) -> str:
         return f"{self.title}"
 
 
-class Comment(models.Model):
+class Comment(TimeStampedModel):
     """Blog post comment model."""
 
     post = models.ForeignKey(
@@ -38,7 +40,7 @@ class Comment(models.Model):
     body = models.TextField(help_text="Full content of this comment")
 
     class Meta:
-        ordering = ['pk']
+        ordering = ["pk"]
 
     def __str__(self) -> str:
         return f"{self.name}<{self.email}>: {str(self.body)[:80]}"
