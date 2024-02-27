@@ -1,1 +1,2 @@
-+ [![cov](https://alexey74.github.io/str_blog/badges/coverage.svg)](https://github.com/alexey74/str_blog/actions)
+![code coverage](https://raw.githubusercontent.com/alexey74/str_blog/coverage-badge/coverage.svg)
+
