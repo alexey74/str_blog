@@ -19,6 +19,7 @@ from pytest_lambda import lambda_fixture
 from ddf import G
 from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
+from django.conf import settings
 
 from blog.models import Post
 
@@ -51,9 +52,15 @@ class TestPostModelViewSet(ViewSetTest):
 
     detail_url = lambda_fixture(lambda post: url_for("post-detail", post.pk))
 
-    class TestList(UsesGetMethod, UsesListEndpoint, Returns200, ReturnsLimitOffsetPagination, AsUser("admuser")):
+    class TestList(
+        UsesGetMethod,
+        UsesListEndpoint,
+        Returns200,
+        ReturnsLimitOffsetPagination,
+        AsUser("admuser"),
+    ):
         posts = lambda_fixture(
-            lambda: G(Post, n=50),
+            lambda: G(Post, n=settings.REST_FRAMEWORK["PAGE_SIZE"] - 1),
             autouse=True,
         )
 
