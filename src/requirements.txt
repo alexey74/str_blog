@@ -1,7 +1,7 @@
 asgiref==3.7.2
 attrs==23.2.0
 Django==5.0.2
--e git+https://github.com/paulocheque/django-dynamic-fixture.git@eb4424798bb6ba60c3eab5ca1a23f86891051516#egg=django_dynamic_fixture
+git+https://github.com/paulocheque/django-dynamic-fixture.git@eb4424798bb6ba60c3eab5ca1a23f86891051516#egg=django_dynamic_fixture
 djangorestframework==3.14.0
 inflection==0.3.1
 iniconfig==2.0.0
