@@ -29,21 +29,16 @@ jobs:
     - name: Run Tests
       run: |
         mkdir -p coverage
-        pytest --cov-report xml:coverage/cov.xml --cov-report=json:coverage/coverage-summary.json --cov=blog src/
-    - name: Code Coverage Report
-      uses: irongut/CodeCoverageSummary@v1.3.0
+        pytest --cov=blog src/
+    - name: Creating coverage folder
+      run: |
+        mkdir -p coverage
+    - name: Coverage Bagdge
+      uses: tj-actions/coverage-badge-py@v1.8
       with:
-        filename: coverage/cov.xml
-        badge: true
-        fail_below_min: true
-        format: markdown
-        hide_branch_rate: false
-        hide_complexity: true
-        indicators: true
-        output: both
-        thresholds: '60 80'
-    - name: Update Coverage Badge
-      # GitHub actions: default branch variable
-      # https://stackoverflow.com/questions/64781462/github-actions-default-branch-variable
-      if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-      uses: we-cli/coverage-badge-action@main
+        output: coverage/coverage.svg
+    - name: Publish coverage report to coverage-badge branch
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: coverage-badge
+        folder: coverage
