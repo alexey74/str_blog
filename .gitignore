@@ -2,6 +2,7 @@
 /**/db.sqlite3
 /**/__pycache__/
 /**/.pytest_cache/
-/src/cov_html/
-/src/cov.xml
-/src/.coverage
+/**/cov_html/
+/**/cov.xml
+/**/.coverage
+/**/coverage.json
