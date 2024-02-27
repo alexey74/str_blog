@@ -1,12 +1,19 @@
+amqp==5.2.0
 api-client==1.3.1
 asgiref==3.7.2
 attrs==23.2.0
+billiard==4.2.0
+celery==5.3.6
 certifi==2024.2.2
 charset-normalizer==3.3.2
 click==8.1.7
+click-didyoumean==0.3.0
+click-plugins==1.1.1
+click-repl==0.3.0
 colorama==0.4.6
 coverage==7.4.3
 cssbeautifier==1.15.1
+dj-database-url==2.1.0
 Django==5.0.2
 django-dynamic-fixture @ git+https://github.com/paulocheque/django-dynamic-fixture.git@eb4424798bb6ba60c3eab5ca1a23f86891051516
 djangorestframework==3.14.0
@@ -19,11 +26,14 @@ inflection==0.3.1
 iniconfig==2.0.0
 jsbeautifier==1.15.1
 json5==0.9.17
+kombu==5.3.5
 lazy-object-proxy==1.10.0
 Markdown==3.5.2
 packaging==23.2
 pathspec==0.12.1
 pluggy==1.4.0
+prompt-toolkit==3.0.43
+psycopg2==2.9.9
 pytest==7.4.4
 pytest-assert-utils==0.3.1
 pytest-common-subject==1.0.6
@@ -33,8 +43,10 @@ pytest-drf==1.1.3
 pytest-fixture-order==0.1.4
 pytest-lambda==1.3.0
 pytest-mock==3.12.0
+python-dateutil==2.8.2
 pytz==2024.1
 PyYAML==6.0.1
+redis==5.0.1
 regex==2023.12.25
 requests==2.31.0
 six==1.16.0
@@ -42,5 +54,9 @@ sortedcontainers==2.4.0
 sqlparse==0.4.4
 tenacity==8.2.3
 tqdm==4.66.2
+typing_extensions==4.10.0
+tzdata==2024.1
 urllib3==2.2.1
+vine==5.1.0
+wcwidth==0.2.13
 wrapt==1.16.0

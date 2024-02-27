@@ -11,7 +11,7 @@ class Command(BaseCommand):
     MAX_BATCH_SIZE = 100
 
     help = """
-    Imports data from JSON placeholder API. 
+    Imports data from JSON placeholder API.
     
     Only posts and comments will be imported.
     """

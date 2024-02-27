@@ -1,0 +1,71 @@
+version: "2"
+
+x-django: &django
+    restart: unless-stopped
+    build:
+      context: ..
+      dockerfile: ./deploy/Dockerfile
+    volumes:
+      - static_volume:/app/django_static
+    environment:
+      DEBUG: "False"
+      CELERY_BROKER_URL: "redis://redis:6379/0"
+      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
+      DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+      DJANGO_SETTINGS_MODULE: config.settings.live
+      DJANGO_STATIC_ROOT: /app/django_static
+      DJANGO_SECRET_KEY: __topsecret12345670__
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_PASSWORD: admin
+      DJANGO_SUPERUSER_EMAIL: "admin@example.com"
+    env_file:
+      - ../.env
+
+services:
+  nginx:
+    restart: always
+    image: docker.io/nginx:1.25-alpine
+    ports:
+      - 8000:8000
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/app/django_static
+
+  server:
+    <<: *django
+    entrypoint: /conf/server-entrypoint.sh
+    expose:
+      - 8000
+    depends_on:
+      - db
+      - redis
+      - nginx
+
+  worker:
+    <<: *django
+    entrypoint: /conf/worker-entrypoint.sh
+    depends_on:
+      - server
+      - redis
+
+  redis:
+    restart: unless-stopped
+    image: docker.io/redis:7.2-alpine
+    expose:
+      - 6379
+
+  db:
+    image: docker.io/postgres:16.2-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    expose:
+      - 5432
+
+volumes:
+  static_volume: {}
+  postgres_data: {}

@@ -7,7 +7,6 @@ from apiclient import (
 )
 
 
-# Define endpoints, using the provided decorator.
 @endpoint(base_url="https://jsonplaceholder.typicode.com")
 class Endpoint:
     posts = "posts"
