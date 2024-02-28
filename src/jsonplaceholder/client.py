@@ -1,3 +1,4 @@
+from typing import Any
 from apiclient import (
     APIClient,
     endpoint,
@@ -20,7 +21,7 @@ class JSONPlaceholderClient(APIClient):
     JSON Placeholder fake API client.
     """
 
-    def __init__(self, *args, **kw):
+    def __init__(self, *args, **kw) -> None:
         super().__init__(
             *args,
             **kw
@@ -38,3 +39,8 @@ class JSONPlaceholderClient(APIClient):
     @retry_request
     def get_all(self, model: str) -> dict:
         return self.get(getattr(Endpoint, model + "s"))
+
+    def put_one(self, model: str, data: dict) -> Any:
+        oid = data["id"]
+        url = getattr(Endpoint, model).format(id=oid)
+        return self.put(url, data)

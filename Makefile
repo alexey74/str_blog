@@ -4,6 +4,9 @@ COMPOSE_PROJECT_NAME ?= blog
 
 -include .env
 export
+
+all: | dc-down test dc-build dc-up
+
 test:
 	$(MAKE) -C src $@ 
 
@@ -17,4 +20,4 @@ prune: clean
 dc-%:
 	$(DOCKER_COMPOSE) -f deploy/docker-compose.yml $* $(args)
 
-.PHONY: test clean prune
+.PHONY: all test clean prune

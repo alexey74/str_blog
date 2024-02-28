@@ -7,19 +7,11 @@ x-django: &django
       dockerfile: ./deploy/Dockerfile
     volumes:
       - static_volume:/app/django_static
-    environment:
-      DEBUG: "False"
-      CELERY_BROKER_URL: "redis://redis:6379/0"
-      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
-      DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
-      DJANGO_SETTINGS_MODULE: config.settings.live
-      DJANGO_STATIC_ROOT: /app/django_static
-      DJANGO_SECRET_KEY: __topsecret12345670__
-      DJANGO_SUPERUSER_USERNAME: admin
-      DJANGO_SUPERUSER_PASSWORD: admin
-      DJANGO_SUPERUSER_EMAIL: "admin@example.com"
     env_file:
-      - ../.env
+    - path: ./django.env
+      required: true # default
+    - path: ../.env
+      required: false
 
 services:
   nginx:

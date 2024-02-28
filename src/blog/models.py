@@ -43,4 +43,14 @@ class Comment(TimeStampedModel):
         ordering = ["pk"]
 
     def __str__(self) -> str:
-        return f"{self.name}<{self.email}>: {str(self.body)[:80]}"
+        return f"{self.name}<{self.email}>: {self.body!s:.80}"
+
+
+class SyncLog(TimeStampedModel):
+    success = models.BooleanField(null=True, blank=True)
+    record_count = models.PositiveBigIntegerField(default=0)
+    end_date = models.DateTimeField(null=True, blank=True)
+    result = models.JSONField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["pk"]

@@ -19,6 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    "django_object_actions",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     # Third-party apps
     "rest_framework",
     "rest_framework.authtoken",
+    "django_celery_beat",
     # Local apps
     "blog",
 ]

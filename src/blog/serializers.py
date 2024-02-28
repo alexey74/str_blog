@@ -17,14 +17,28 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class BulkSavingSerializer(serializers.ListSerializer):
+    MAX_BATCH_SIZE = 100
+
+    def create(self, validated_data):
+        model_class = getattr(self.child.Meta, "model")
+        instances = [model_class(**item) for item in validated_data]
+        return model_class.objects.bulk_create(
+            instances, batch_size=self.MAX_BATCH_SIZE
+        )
+
+
 class JPHPostSerializer(PostSerializer):
     id = serializers.IntegerField()
     userId = serializers.IntegerField(source="user_id")
 
-    class Meta(PostSerializer.Meta):
+    class Meta:
+        model = Post
+        exclude = ['created_date', 'modified_date']
         extra_kwargs = {
             "user_id": {"write_only": True},
         }
+        list_serializer_class = BulkSavingSerializer
 
 
 class JPHCommentSerializer(CommentSerializer):
@@ -35,8 +49,8 @@ class JPHCommentSerializer(CommentSerializer):
 
     class Meta:
         model = Comment
-        
-        exclude = ["post"]
+        exclude = ["post", 'created_date', 'modified_date']
         extra_kwargs = {
             "post": {"write_only": True},
         }
+        list_serializer_class = BulkSavingSerializer
