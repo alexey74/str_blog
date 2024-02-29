@@ -27,4 +27,4 @@ flushdb:
 	python manage.py sqlflush | python manage.py dbshell
 
 
-.PHONY: all test admuser run import flushdb
+.PHONY: all test admuser run import flushdb clean

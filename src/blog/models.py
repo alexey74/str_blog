@@ -1,7 +1,9 @@
 """Module providing core models for the Blog app."""
 
-from django.db import models
+# mypy: allow-untyped-globals
+
 from django.conf import settings
+from django.db import models
 
 from .abstract_models import TimeStampedModel
 

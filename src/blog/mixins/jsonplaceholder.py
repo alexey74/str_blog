@@ -1,16 +1,14 @@
-from collections import OrderedDict, namedtuple
 import datetime
-from typing import Any, Dict
 import logging
+from collections import namedtuple
+from typing import Any, Dict
 
+from apiclient.exceptions import APIClientError
+from blog.models import Comment, Post, SyncLog
+from blog.serializers import JPHCommentSerializer, JPHPostSerializer
 from django.db import transaction
 from django.utils import timezone
-from rest_framework.renderers import JSONRenderer
-from apiclient.exceptions import APIClientError
-
 from jsonplaceholder.client import JSONPlaceholderClient
-from blog.models import Post, Comment, SyncLog
-from blog.serializers import JPHPostSerializer, JPHCommentSerializer
 
 EndPoint = namedtuple("EndPoint", ["model", "serializer_class"])
 
@@ -23,7 +21,7 @@ class NotEmptyError(Exception):
     in tables to be filled during import.
     """
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "Database tables not empty, refusing import."
 
 
@@ -34,9 +32,9 @@ class JSONPlaceholderAdapterMixin:
         "comment": EndPoint(Comment, JPHCommentSerializer),
     }
 
-    def __init__(self, *args, **kw) -> None:
+    def __init__(self, *args: Any, **kw: Any) -> None:
         super().__init__(*args, **kw)
-        self._client = None
+        self._client: JSONPlaceholderClient | None = None
 
     def check_import_possible(self) -> None:
         if any(ep.model.objects.count() for ep in self.ENDPOINTS.values()):
@@ -44,7 +42,7 @@ class JSONPlaceholderAdapterMixin:
 
     @property
     def client(self) -> JSONPlaceholderClient:
-        if not self._client:
+        if self._client is None:
             self._client = JSONPlaceholderClient()
         return self._client
 
@@ -62,7 +60,7 @@ class JSONPlaceholderImportMixin(JSONPlaceholderAdapterMixin):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-    def import_all(self):
+    def import_all(self) -> None:
         self.check_import_possible()
         with transaction.atomic():
             for endpoint in self.ENDPOINTS:
@@ -93,7 +91,8 @@ class JSONPlaceholderPushMixin(JSONPlaceholderAdapterMixin):
 
     def push_resource(self, endpoint: str, queryset: Any) -> Dict[str, Any]:
         resource = self.ENDPOINTS[endpoint]
-        result = {"count": 0, "errors": []}
+        count = 0
+        errors = []
         with transaction.atomic():
             if self.last_sync_date:
                 queryset = queryset.filter(modified_date__gte=self.last_sync_date)
@@ -105,12 +104,12 @@ class JSONPlaceholderPushMixin(JSONPlaceholderAdapterMixin):
                     log.debug("Pushing to %s: %s", endpoint, obj)
                     self.client.put_one(endpoint, obj)
                 except APIClientError as err:
-                    result["errors"] += {"obj": obj, "message": str(err)}
+                    errors.append({"obj": obj, "message": str(err)})
                 else:
-                    result["count"] += 1
-        return result
+                    count += 1  # type: ignore
+        return {"count": count, "errors": errors}
 
-    def push_all(self):
+    def push_all(self) -> Dict[str, Any]:
         log_record = SyncLog.objects.create()
         result = {}
         count = 0
@@ -120,5 +119,5 @@ class JSONPlaceholderPushMixin(JSONPlaceholderAdapterMixin):
         SyncLog.objects.filter(pk=log_record.pk).update(
             end_date=timezone.now(), record_count=count, result=result, success=True
         )
-        result["count"] = count
+        result["count"] = count  # type: ignore
         return result

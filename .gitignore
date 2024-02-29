@@ -7,3 +7,6 @@
 /**/.coverage
 /**/coverage.json
 /.env
+megalinter-reports/
+perms.txt
+/**/*.bak

@@ -1,4 +1,4 @@
-from jsonplaceholder.client import JSONPlaceholderClient, Endpoint
+from jsonplaceholder.client import Endpoint, JSONPlaceholderClient
 
 
 def test_get_one_calls_right_url(mocker):

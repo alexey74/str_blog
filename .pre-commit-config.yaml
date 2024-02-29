@@ -1,0 +1,29 @@
+x-ml-args:
+  &ml-args # workaround for https://github.com/oxsecurity/megalinter/issues/3061
+  args: [mega-linter-runner, --containername, MegaLinter, --flavor, python]
+
+repos:
+  - repo: https://github.com/oxsecurity/megalinter
+    rev: v7.9.0 # Git tag specifying the hook, not mega-linter-runner, version
+    hooks:
+      - id: megalinter-incremental # Faster, less thorough
+        stages:
+          - commit
+        <<: *ml-args
+      - id: megalinter-full # Slower, more thorough
+        stages:
+          - push
+        <<: *ml-args
+
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: pytest-check
+        stages: [commit]
+        types: [python]
+        entry: ./.venv/bin/pytest
+        args:
+          - src/
+        language: system
+        pass_filenames: false
+        always_run: true

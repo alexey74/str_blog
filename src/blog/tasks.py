@@ -1,11 +1,9 @@
 from celery import shared_task
 from celery.utils.log import get_task_logger
 
-log = get_task_logger(__name__)
+from .mixins.jsonplaceholder import JSONPlaceholderPushMixin
 
-from .mixins.jsonplaceholder import (
-    JSONPlaceholderPushMixin,
-)
+log = get_task_logger(__name__)
 
 
 class Pusher(JSONPlaceholderPushMixin):
@@ -13,7 +11,7 @@ class Pusher(JSONPlaceholderPushMixin):
 
 
 @shared_task
-def push_to_jsonplaceholder():
+def push_to_jsonplaceholder() -> None:
     log.info("Starting full push...")
     pusher = Pusher()
     result = pusher.push_all()

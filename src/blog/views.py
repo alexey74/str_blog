@@ -2,11 +2,11 @@
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.viewsets import ModelViewSet
 
-from .serializers import PostSerializer, CommentSerializer
-from .models import Post, Comment
+from .models import Comment, Post
+from .serializers import CommentSerializer, PostSerializer
 
 
 class PostModelViewSet(ModelViewSet):
@@ -22,4 +22,4 @@ class CommentModelViewSet(ModelViewSet):
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    return render(request, 'index.djhtml')
+    return render(request, "index.djhtml")

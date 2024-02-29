@@ -1,9 +1,8 @@
-from django.core.management import call_command, CommandError
 import pytest
+from blog.models import Comment, Post
+from django.core.management import CommandError, call_command
 from django_dynamic_fixture import G
-
 from jsonplaceholder.client import JSONPlaceholderClient
-from blog.models import Post, Comment
 
 
 @pytest.mark.django_db

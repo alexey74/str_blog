@@ -1,3 +1,4 @@
+# pragma: no cover
 import sys
 
 MIN_PYTHON = (3, 8)

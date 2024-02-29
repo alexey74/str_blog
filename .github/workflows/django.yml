@@ -2,13 +2,12 @@ name: Django CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -16,29 +15,29 @@ jobs:
         python-version: [3.11]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      working-directory: src
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Tests
-      run: |
-        mkdir -p coverage
-        pytest --cov=blog src/
-    - name: Creating coverage folder
-      run: |
-        mkdir -p coverage
-    - name: Coverage Bagdge
-      uses: tj-actions/coverage-badge-py@v1.8
-      with:
-        output: coverage/coverage.svg
-    - name: Publish coverage report to coverage-badge branch
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: coverage-badge
-        folder: coverage
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        working-directory: src
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run Tests
+        run: |
+          mkdir -p coverage
+          pytest --cov=blog src/
+      - name: Creating coverage folder
+        run: |
+          mkdir -p coverage
+      - name: Coverage Bagdge
+        uses: tj-actions/coverage-badge-py@v1.8
+        with:
+          output: coverage/coverage.svg
+      - name: Publish coverage report to coverage-badge branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: coverage-badge
+          folder: coverage

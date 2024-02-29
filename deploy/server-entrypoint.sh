@@ -1,17 +1,13 @@
 #!/bin/sh
 
-until cd /app/
-do
-    echo "Waiting for server volume..."
+until cd /app/; do
+	echo "Waiting for server volume..."
 done
 
-
-until python manage.py migrate
-do
-    echo "Waiting for db to be ready..."
-    sleep 5
+until python manage.py migrate; do
+	echo "Waiting for db to be ready..."
+	sleep 5
 done
-
 
 python manage.py collectstatic --noinput
 python manage.py createsuperuser --noinput || true

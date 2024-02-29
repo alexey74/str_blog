@@ -1,8 +1,8 @@
 import os
+
 import dj_database_url
 
-from .common import *
-
+from .common import *  # noqa
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
@@ -20,4 +20,3 @@ DATABASES = {
 }
 
 STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT")
-

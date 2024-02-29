@@ -1,28 +1,21 @@
-from typing import Dict, Any
+from typing import Any, Dict
+
 import pytest
+from blog.models import Post
+from blog.serializers import PostSerializer
+from ddf import G
+from django.conf import settings
+from django.contrib.auth import get_user_model
 from pytest_drf import (
-    ViewSetTest,
-    Returns200,
-    Returns201,
-    Returns204,
-    UsesGetMethod,
-    UsesDeleteMethod,
-    UsesDetailEndpoint,
-    UsesListEndpoint,
-    UsesPatchMethod,
-    UsesPostMethod,
     AsUser,
+    Returns200,
     ReturnsLimitOffsetPagination,
+    UsesGetMethod,
+    UsesListEndpoint,
+    ViewSetTest,
 )
 from pytest_drf.util import pluralized, url_for
 from pytest_lambda import lambda_fixture
-from ddf import G
-from django.contrib.auth import get_user_model
-from rest_framework.authtoken.models import Token
-from django.conf import settings
-
-from blog.models import Post
-from blog.serializers import PostSerializer
 
 User = get_user_model()
 

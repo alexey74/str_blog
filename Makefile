@@ -5,7 +5,7 @@ COMPOSE_PROJECT_NAME ?= blog
 -include .env
 export
 
-all: | dc-down test dc-build dc-up
+all: | dc-down dc-build dc-up
 
 test:
 	$(MAKE) -C src $@ 

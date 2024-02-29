@@ -1,13 +1,13 @@
 version: "2"
 
 x-django: &django
-    restart: unless-stopped
-    build:
-      context: ..
-      dockerfile: ./deploy/Dockerfile
-    volumes:
-      - static_volume:/app/django_static
-    env_file:
+  restart: unless-stopped
+  build:
+    context: ..
+    dockerfile: ./deploy/Dockerfile
+  volumes:
+    - static_volume:/app/django_static
+  env_file:
     - path: ./django.env
       required: true # default
     - path: ../.env
