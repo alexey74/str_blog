@@ -1,7 +1,4 @@
 import pytest
-from blog.admin import PostAdmin, SyncLogAdmin
-from blog.mixins.jsonplaceholder import NotEmptyError
-from blog.models import Post, SyncLog
 from ddf import G
 from django.contrib import messages
 from django.contrib.admin.sites import AdminSite
@@ -9,6 +6,10 @@ from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.shortcuts import reverse
 from django.test import RequestFactory
+
+from blog.admin import PostAdmin, SyncLogAdmin
+from blog.mixins.jsonplaceholder import NotEmptyError
+from blog.models import Post, SyncLog
 
 User = get_user_model()
 
@@ -37,7 +38,7 @@ def test_import_from_jsonplaceholder_informs_user_on_success(
     import_all_mock = mocker.patch.object(post_admin, "import_all")
     message_mock = mocker.patch.object(post_admin, "message_user")
 
-    post_admin.import_from_jsonplaceholder(admin_request, obj=None)
+    post_admin.import_from_jsonplaceholder(admin_request)
 
     import_all_mock.assert_called_once()
     message_mock.assert_called_once()
@@ -52,7 +53,7 @@ def test_import_from_jsonplaceholder_reports_error(mocker, site, admin_request):
     )
     message_mock = mocker.patch.object(post_admin, "message_user")
 
-    post_admin.import_from_jsonplaceholder(admin_request, obj=None)
+    post_admin.import_from_jsonplaceholder(admin_request)
 
     import_all_mock.assert_called_once()
     message_mock.assert_called_once()

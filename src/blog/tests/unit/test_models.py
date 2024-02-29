@@ -1,5 +1,6 @@
-from blog.models import Comment, Post
 from ddf import N
+
+from blog.models import Comment, Post
 
 
 def test_post__str__returns_title():

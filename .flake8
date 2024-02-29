@@ -17,3 +17,6 @@ exclude =
     tests/,
     migrations/,
     .venv/,
+    scripts/,
+    settings/,
+

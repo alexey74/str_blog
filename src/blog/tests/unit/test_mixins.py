@@ -1,7 +1,8 @@
 from apiclient.exceptions import APIClientError
+from ddf import G
+
 from blog.mixins.jsonplaceholder import JSONPlaceholderPushMixin
 from blog.models import Post
-from ddf import G
 
 
 class JSONPlaceholderPusher(JSONPlaceholderPushMixin):

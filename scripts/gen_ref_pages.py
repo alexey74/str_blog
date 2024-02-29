@@ -11,18 +11,21 @@ nav = mkdocs_gen_files.Nav()
 root = Path(__file__).parent.parent
 src = root / "src"
 
-for path in sorted(src.rglob("*.py")):
+for path in sorted(src.rglob("*.py")):  # noqa: C901
     module_path = path.relative_to(src).with_suffix("")
     doc_path = path.relative_to(src).with_suffix(".md")
     full_doc_path = Path("reference", doc_path)
 
     parts = tuple(module_path.parts)
 
+    if {"tests", "migrations", "config"} & set(parts):
+        continue
+
     if parts[-1] == "__init__":
         parts = parts[:-1]
         doc_path = doc_path.with_name("index.md")
         full_doc_path = full_doc_path.with_name("index.md")
-    elif parts[-1] == "__main__":
+    elif parts[-1] in {"__main__", "apps", "manage", "urls"}:
         continue
     elif "tests" in parts or "migrations" in parts:
         continue

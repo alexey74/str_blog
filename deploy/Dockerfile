@@ -18,5 +18,4 @@ RUN \
 COPY src /app
 COPY deploy /conf
 
-RUN chmod +x /conf/server-entrypoint.sh && \
-    chmod +x /conf/worker-entrypoint.sh
+RUN chmod +x /conf/*-entrypoint.sh

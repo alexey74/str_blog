@@ -9,7 +9,7 @@ SECRET_KEY = "__insecure__"  # nosec
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Database
@@ -23,3 +23,7 @@ DATABASES = {
 }
 
 CELERY_BROKER_URL = "memory://"
+
+INSTALLED_APPS += [  # noqa: F405
+    "drf_test_generator",
+]

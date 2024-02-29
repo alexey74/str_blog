@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "django_celery_beat",
+    "drf_yasg",
     # Local apps
     "blog",
 ]
@@ -119,7 +120,13 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 100,
 }
 
-
+SWAGGER_SETTINGS = {
+    "LOGIN_URL": "/api-auth/login/",
+    "SECURITY_DEFINITIONS": {
+        "Basic": {"type": "basic"},
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"},
+    },
+}
 # Local settings
 
 # Default user ID to assign to blog posts

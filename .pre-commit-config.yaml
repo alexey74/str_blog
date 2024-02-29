@@ -10,6 +10,15 @@ repos:
         stages:
           - commit
         <<: *ml-args
+        args:
+          - mega-linter-runner
+          - --containername
+          - MegaLinter
+          - --flavor
+          - python
+          - -e
+          - DISABLE_LINTERS=PYTHON_PYRIGHT,PYTHON_PYLINT,PYTHON_RUFF,BASH_EXEC
+
       - id: megalinter-full # Slower, more thorough
         stages:
           - push

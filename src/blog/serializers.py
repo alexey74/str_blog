@@ -8,19 +8,37 @@ from .models import Comment, Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+    """
+    Post model serializer class.
+    """
+
     class Meta:
         model = Post
         fields = "__all__"
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    """
+    Comment model serializer class.
+    """
+
     class Meta:
         model = Comment
         fields = "__all__"
 
 
-class BulkSavingSerializer(serializers.ListSerializer):
+class BulkSavingSerializer(
+    serializers.ListSerializer
+):  # pylint: disable=abstract-method
+    """
+    Serializer class that uses `bulk_create()` to optimize
+    saving a batch of instances.
+
+    Use it as a `Meta.list_serializer_class` in other serializers.
+    """
+
     MAX_BATCH_SIZE = 100
+    """Size of the batch of instances for bulk creation."""
 
     def create(self, validated_data: dict) -> Any:
         if self.child:
@@ -29,9 +47,14 @@ class BulkSavingSerializer(serializers.ListSerializer):
             return model_class.objects.bulk_create(
                 instances, batch_size=self.MAX_BATCH_SIZE
             )
+        return None
 
 
 class JPHPostSerializer(PostSerializer):
+    """
+    Post model serializer class with JSON Placeholder API format support.
+    """
+
     id = serializers.IntegerField()
     userId = serializers.IntegerField(source="user_id")
 
@@ -45,6 +68,10 @@ class JPHPostSerializer(PostSerializer):
 
 
 class JPHCommentSerializer(CommentSerializer):
+    """
+    Comment model serializer class with JSON Placeholder API format support.
+    """
+
     id = serializers.IntegerField()
     postId = serializers.PrimaryKeyRelatedField(
         source="post", queryset=Post.objects.all()

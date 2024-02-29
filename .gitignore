@@ -13,3 +13,4 @@ perms.txt
 /site/
 /.mypy_cache/
 /.ruff_cache/
+/**/.hypothesis/

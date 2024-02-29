@@ -1,3 +1,7 @@
+"""
+Custom auth classes for DRF.
+"""
+
 from rest_framework import authentication
 
 

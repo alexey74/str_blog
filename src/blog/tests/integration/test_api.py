@@ -1,8 +1,6 @@
 from typing import Any, Dict
 
 import pytest
-from blog.models import Post
-from blog.serializers import PostSerializer
 from ddf import G
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -16,6 +14,9 @@ from pytest_drf import (
 )
 from pytest_drf.util import pluralized, url_for
 from pytest_lambda import lambda_fixture
+
+from blog.models import Post
+from blog.serializers import PostSerializer
 
 User = get_user_model()
 

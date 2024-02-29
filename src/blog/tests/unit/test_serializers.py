@@ -1,7 +1,8 @@
 import pytest
+from django_dynamic_fixture import G
+
 from blog.models import Post
 from blog.serializers import JPHCommentSerializer, JPHPostSerializer
-from django_dynamic_fixture import G
 
 
 def test_jph_post_serializer_maps_correct_field_values_for_bulk_data():

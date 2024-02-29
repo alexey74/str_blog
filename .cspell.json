@@ -11,6 +11,13 @@
   ],
   "language": "en",
   "noConfigSearch": true,
-  "words": ["megalinter", "oxsecurity", "jsonplaceholder"],
+  "words": [
+    "megalinter",
+    "oxsecurity",
+    "jsonplaceholder",
+    "apiclient",
+    "syncable",
+    "authtoken"
+  ],
   "version": "0.2"
 }

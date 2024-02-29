@@ -26,5 +26,10 @@ import:
 flushdb:
 	python manage.py sqlflush | python manage.py dbshell
 
+gen_api_tests: blog/tests/integration/test_api_auto.py
+
+blog/tests/integration/test_api_auto.py: blog/*.py
+	python manage.py generate_viewset_tests -r blog.urls.router --variant pytest > $@
+
 
 .PHONY: all test admuser run import flushdb clean

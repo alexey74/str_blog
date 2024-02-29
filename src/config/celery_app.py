@@ -1,3 +1,9 @@
+"""
+Celery app module for the Blog project.
+
+Boilerplate code here.
+"""
+
 import os
 
 from celery import Celery

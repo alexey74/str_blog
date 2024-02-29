@@ -11,7 +11,7 @@ from .abstract_models import TimeStampedModel
 class Post(TimeStampedModel):
     """Blog post model."""
 
-    # TODO: use a FK here
+    # we should use a FK here
     user_id = models.PositiveBigIntegerField(
         "User ID",
         default=settings.DEFAULT_USER_ID,
@@ -49,6 +49,12 @@ class Comment(TimeStampedModel):
 
 
 class SyncLog(TimeStampedModel):
+    """
+    Sync log model.
+
+    Keeps records of every sync (push) operation.
+    """
+
     success = models.BooleanField(null=True, blank=True)
     record_count = models.PositiveBigIntegerField(default=0)
     end_date = models.DateTimeField(null=True, blank=True)

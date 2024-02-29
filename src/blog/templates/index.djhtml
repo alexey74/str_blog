@@ -22,11 +22,18 @@
             <h2>Resources:</h2>
             <ul>
                 <li>
-                    <a href="blog/">API portal</a>
+                    <a href="{% url 'admin:index' %}">Admin portal</a>
+                </li>                
+                <li>
+                    <a href="blog/">Browseable API</a>
                 </li>
                 <li>
-                    <a href="{% url 'admin:index' %}">Admin portal</a>
+                    <a href="swagger/">Swagger UI</a>
                 </li>
+                <li>
+                    <a href="redoc/">Redoc UI</a>
+                </li>
+                                
             </ul>
         </div>
     </body>

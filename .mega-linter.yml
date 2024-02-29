@@ -21,7 +21,7 @@ DISABLE:
 
 DISABLE_LINTERS:
   - PYTHON_PYRIGHT
-  - PYTHON_PYLINT
+  - PYTHON_RUFF
   - BASH_EXEC
 
 SHOW_ELAPSED_TIME: true
@@ -35,6 +35,19 @@ COPYPASTE_FILTER_REGEX_EXCLUDE: .*/migrations/
 PYTHON_BANDIT_FILTER_REGEX_EXCLUDE: tests
 PYTHON_MYPY_FILTER_REGEX_EXCLUDE: tests|manage\.py
 MARKDOWN_MARKDOWN_LINK_CHECK_DISABLE_ERRORS: true
+ACTION_ACTIONLINT_DISABLE_ERRORS: true
+PYTHON_PYLINT_FILTER_REGEX_EXCLUDE: tests|migrations|scripts|settings
+PYTHON_PYLINT_PRE_COMMANDS:
+  - command: grep -v psycopg < src/requirements.txt > /tmp/r.txt
+      && pip install -qq --no-cache-dir -r /tmp/r.txt && rm -f /tmp/r.txt
+    cwd: workspace
+    continue_if_failed: false
+PYTHON_PYLINT_ARGUMENTS:
+  - "--load-plugins=pylint_django"
+  - "--django-settings-module=config.settings"
+  - "src/"
+PYTHON_PYLINT_CLI_LINT_MODE: project
+PYTHON_RUFF_FILTER_REGEX_EXCLUDE: settings
 
 # see https://github.com/oxsecurity/megalinter/issues/1975#issuecomment-1283162672
 PRE_COMMANDS:

@@ -1,3 +1,7 @@
+"""
+Settings for live environment run in a container stack.
+"""
+
 import os
 
 import dj_database_url
@@ -20,3 +24,9 @@ DATABASES = {
 }
 
 STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT")
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://redis:6379",
+    }
+}

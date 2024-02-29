@@ -15,12 +15,12 @@ A modern Linux system with a running Docker, `docker-compose`, GNU `make` and `g
 
 See [Quick Start Guide](./docs/quick_start.md).
 
+## Technical Documentation
+
+The technical documentation is available at [GitHub pages site](https://alexey74.github.io/str_blog/).
+
 ## CI/CD
 
-Linting, tests and documentation building are handled by GitHub workflow actions.
-
-
-
-
+Linting, tests and documentation building are handled by [GitHub workflow actions](./actions/).
 
 

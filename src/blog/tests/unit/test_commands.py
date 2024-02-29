@@ -1,7 +1,8 @@
 import pytest
-from blog.models import Comment, Post
 from django.core.management import CommandError, call_command
 from django_dynamic_fixture import G
+
+from blog.models import Comment, Post
 from jsonplaceholder.client import JSONPlaceholderClient
 
 

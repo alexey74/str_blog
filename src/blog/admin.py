@@ -1,4 +1,6 @@
-"""Module providing admin UI for the Blog app."""
+"""
+Module providing admin UI for the Blog app.
+"""
 
 from typing import Any
 
@@ -30,15 +32,24 @@ class SyncableAdminMixin(
     DjangoObjectActions,
     admin.ModelAdmin,
 ):
+    """
+    A mixin for fact model admins providing import/push actions.
+    """
+
     @action(
         label="Import from JPH",
         description="Import all records from JSON Placeholder API",
     )
-    def import_from_jsonplaceholder(self, request: HttpRequest, obj: Any) -> None:
+    def import_from_jsonplaceholder(
+        self, request: HttpRequest, _obj: Any = None
+    ) -> None:
+        "Admin action to import all records from JSON Placeholder API"
         try:
             self.import_all()
         except NotEmptyError as err:
-            self.message_user(request, _("Failed to import: %s" % err), messages.ERROR)
+            self.message_user(
+                request, _("Failed to import: ") + str(err), messages.ERROR
+            )
         else:
             self.message_user(
                 request,
@@ -52,9 +63,10 @@ class SyncableAdminMixin(
         description="Push selected records to JSON Placeholder API",
     )
     def push_to_jsonplaceholder(self, request: HttpRequest, queryset: QuerySet) -> None:
+        "Admin action to push selected records to JSON Placeholder API"
         if queryset:
             result = self.push_by_queryset(queryset)
-            msg = _("Pushed %d recs, result: %s" % (queryset.count(), result))
+            msg = _("Pushed %d recs, result: %s") % (queryset.count(), result)
 
             self.message_user(
                 request,
@@ -98,7 +110,10 @@ class SyncLogAdmin(admin.ModelAdmin):
         label="Full push to JPH",
         description="Push all records to JSON Placeholder API",
     )
-    def push_all_to_jsonplaceholder(self, request: HttpRequest, obj: Any) -> None:
+    def push_all_to_jsonplaceholder(
+        self, request: HttpRequest, _obj: Any = None
+    ) -> None:
+        """Admin action to push all records to JSON Placeholder API."""
         push_to_jsonplaceholder.delay()
         msg = "Started full push in the background, watch the sync log for results."
         self.message_user(

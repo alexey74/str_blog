@@ -40,6 +40,21 @@ services:
       - server
       - redis
 
+  beat:
+    <<: *django
+    entrypoint: /conf/beat-entrypoint.sh
+    depends_on:
+      - server
+      - redis
+    volumes:
+      - celerybeat_schedule:/celerybeat-schedule/
+
+  flower:
+    <<: *django
+    entrypoint: /conf/flower-entrypoint.sh
+    ports:
+      - 5555:5555
+
   redis:
     restart: unless-stopped
     image: docker.io/redis:7.2-alpine
@@ -61,3 +76,4 @@ services:
 volumes:
   static_volume: {}
   postgres_data: {}
+  celerybeat_schedule: {}

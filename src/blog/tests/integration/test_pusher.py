@@ -1,7 +1,8 @@
 import pytest
+from ddf import G
+
 from blog.models import Comment
 from blog.tasks import push_to_jsonplaceholder
-from ddf import G
 
 
 @pytest.mark.django_db
