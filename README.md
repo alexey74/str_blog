@@ -11,9 +11,16 @@ for a simple blog system, with a provision of synchronizing data with an externa
 
 A modern Linux system with a running Docker, `docker-compose`, GNU `make` and `git`.
 
-## Usage
+## Quick Start
 
-Run `make` from the top directory.
+See [Quick Start Guide](./docs/quick_start.md).
+
+## CI/CD
+
+Linting, tests and documentation building are handled by GitHub workflow actions.
+
+
+
 
 
 

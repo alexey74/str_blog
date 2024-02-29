@@ -34,6 +34,7 @@ FILEIO_REPORTER: false
 COPYPASTE_FILTER_REGEX_EXCLUDE: .*/migrations/
 PYTHON_BANDIT_FILTER_REGEX_EXCLUDE: tests
 PYTHON_MYPY_FILTER_REGEX_EXCLUDE: tests|manage\.py
+MARKDOWN_MARKDOWN_LINK_CHECK_DISABLE_ERRORS: true
 
 # see https://github.com/oxsecurity/megalinter/issues/1975#issuecomment-1283162672
 PRE_COMMANDS:

@@ -10,3 +10,6 @@
 megalinter-reports/
 perms.txt
 /**/*.bak
+/site/
+/.mypy_cache/
+/.ruff_cache/
