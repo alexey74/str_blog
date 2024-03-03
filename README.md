@@ -21,6 +21,6 @@ The technical documentation is available at [GitHub pages site](https://alexey74
 
 ## CI/CD
 
-Linting, tests and documentation building are handled by [GitHub workflow actions](./actions/).
+Linting, tests and documentation building are handled by [GitHub workflow actions](https://github.com/alexey74/str_blog/actions/).
 
 
