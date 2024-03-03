@@ -1,0 +1,1209 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../developer_guide/">
+      
+      
+        <link rel="next" href="../reference/blog/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+    
+    
+      
+        <title>Quick Start Guide - DRF-based Blog and Syncher</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#quick-start-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="DRF-based Blog and Syncher" class="md-header__button md-logo" aria-label="DRF-based Blog and Syncher" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DRF-based Blog and Syncher
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quick Start Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="DRF-based Blog and Syncher" class="md-nav__button md-logo" aria-label="DRF-based Blog and Syncher" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    DRF-based Blog and Syncher
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Developer Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Quick Start Guide
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Quick Start Guide
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pre-requisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-requisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starting-services-and-initial-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starting Services and Initial Import
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Starting Services and Initial Import">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initial-import-via-admin-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initial Import via Admin UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-import-via-command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initial Import via Command Line
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replication
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Replication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#full-periodic-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Periodic Push
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-manual-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Manual Push
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#partial-push-of-selected-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partial Push of Selected Records
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restful-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      RESTful API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RESTful API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bearer-token-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bearer Token Authentication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../reference/blog/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    blog
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/abstract_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    abstract_models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/admin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    admin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/authentication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    authentication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/base_views/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    base_views
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../reference/blog/management/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    management
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1_5" id="__nav_5_1_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            management
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_5_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../reference/blog/management/commands/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    commands
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1_5_1" id="__nav_5_1_5_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            commands
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/management/commands/import_jph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    import_jph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../reference/blog/mixins/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    mixins
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1_6" id="__nav_5_1_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            mixins
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/mixins/jsonplaceholder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    jsonplaceholder
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/serializers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serializers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/tasks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tasks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/blog/views/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    views
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../reference/jsonplaceholder/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    jsonplaceholder
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            jsonplaceholder
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/jsonplaceholder/client/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    client
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pre-requisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-requisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starting-services-and-initial-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starting Services and Initial Import
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Starting Services and Initial Import">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initial-import-via-admin-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initial Import via Admin UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-import-via-command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initial Import via Command Line
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replication
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Replication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#full-periodic-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Periodic Push
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-manual-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Manual Push
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#partial-push-of-selected-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partial Push of Selected Records
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restful-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      RESTful API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RESTful API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bearer-token-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bearer Token Authentication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="quick-start-guide">Quick Start Guide</h1>
+<h2 id="pre-requisites">Pre-requisites</h2>
+<p>A modern Linux system with a running Docker, <code>docker-compose</code>, GNU <code>make</code> and <code>git</code>.
+Some testing has been done on <code>podman</code> but it is known to have issues.</p>
+<h2 id="starting-services-and-initial-import">Starting Services and Initial Import</h2>
+<p>Run <code>make</code> from the top directory. This will bring up a Docker stack with an app server
+listening on <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>.
+The stack will be running in the foreground. For a background run, use <code>make bg</code> command,
+and when done with it, bring it down with <code>make dc-down</code>.</p>
+<h3 id="initial-import-via-admin-ui">Initial Import via Admin UI</h3>
+<p>Open the URL above, click the <em>Admin</em> link, login as <code>admin</code> with password <code>admin</code>, then go to any fact model page
+(like <em>Posts</em> or <em>Comments</em>) and press <a href="#">IMPORT FROM JPH</a> button.
+This will start a foreground import job.
+When the import is finished, you will see some records imported from the fake API.</p>
+<h3 id="initial-import-via-command-line">Initial Import via Command Line</h3>
+<p>The initial import can alternatively be run from command line in a separate shell this way:</p>
+<p><code>make import</code></p>
+<h2 id="replication">Replication</h2>
+<p>The system is configured by default to start a full replication (push) job of recently modified records
+to the JSON Placeholder API every 10 minutes.
+It also supports manual starting of full and partial replication.</p>
+<h3 id="full-periodic-push">Full Periodic Push</h3>
+<p>The system is configured by default to start a full replication (push) job of recently modified records
+to the JSON Placeholder API every 10 minutes. The job is started in background, using Celery async task queue.</p>
+<p>After 10 minutes or so you will notice a record in the <em>SyncLog</em> model indicating that the initial push
+has completed. In case all components are functioning properly, the records will have <code>success</code> flag set
+and <code>end date</code> field filled in. The count field should indicate around 600 records, because the initial sync
+pushes all records to the slave system.</p>
+<p>If you modify at least one of the fact records (<em>Post</em>, <em>Comment</em>) and save them, the changes will be pushed
+at the next run of the replication job.
+Some 10 minutes later you will notice another <code>SyncLog</code>
+record, with <code>count</code> field equal to the number of records you've modified.</p>
+<h3 id="full-manual-push">Full Manual Push</h3>
+<p>You can also start the push task manually by running it as an admin action.
+This can be done by opening <em>Periodic Tasks</em> page in the admin, then ticking
+the checkbox next to the <em>Full push to JSON Placeholder API</em> task, selecting <em>Run selected tasks</em> from the
+<em>Action</em> dropdown above the task list, and pressing the <a href="#">Go</a> button next to the dropdown.</p>
+<h3 id="partial-push-of-selected-records">Partial Push of Selected Records</h3>
+<p>Fact models (<em>Posts</em>, <em>Comments</em>) also provide an ability to push a number of manually selected records via an admin action.
+In order to do that, open the list of desired fact objects in the admin, tick checkboxes next to the records
+you wish to push, select <em>Push selected records to JSON Placeholder API</em> from the <em>Action</em> dropdown above, and press
+the <a href="#">Go</a> button next to the dropdown.</p>
+<p>Partial push action is performed in the foreground, and the UI will be blocked until it is complete.</p>
+<h2 id="restful-api">RESTful API</h2>
+<p>The system also acts as a RESTful API server exposing endpoints for accessing and manipulating data.</p>
+<p>A built-in documentation and API browsing system should be available at <a href="http://0.0.0.0:8000/blog/">http://0.0.0.0:8000/blog/</a></p>
+<p>The API accepts regular session authentication with username/password as well as bearer token authentication.</p>
+<h3 id="bearer-token-authentication">Bearer Token Authentication</h3>
+<p>Token can be generated via the admin interface by opening the <em>Tokens</em> model page, and pressing <a href="#">ADD TOKEN</a>.
+The user ID on the next page needs to be filled in manually. You can use value <code>1</code> for the default superuser
+created during system initialization.</p>
+<p>Once the token object is saved, you will see a hexadecimal string generated by the system as its <code>KEY</code> value.
+That string can be used in the <code>Authorization</code> header in order to access the API endpoints as the corresponding user.</p>
+<p>The token can also be generated via a management command that can be run inside Docker stack this way:</p>
+<p><code>make cmd cmd='drf_create_token admin'</code></p>
+<p>The token authentication can be tested on command line by issuing the following <code>curl</code> command:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;TOKEN&gt;&#39;</span><span class="w"> </span>http://localhost:8000/blog/post/1/
+</span></code></pre></div>
+<p>where <code>&lt;TOKEN&gt;</code> should be substituted with the key obtained before.
+If successful, that command should output a JSON record similar to the one below:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;created_date&quot;</span><span class="p">:</span><span class="s2">&quot;2024-02-28T19:25:48.727313Z&quot;</span><span class="p">,</span><span class="nt">&quot;modified_date&quot;</span><span class="p">:</span><span class="s2">&quot;2024-02-28T19:25:48.727343Z&quot;</span><span class="p">,</span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;sunt aut facere repellat provident occaecati excepturi optio reprehenderit&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto&quot;</span><span class="p">}</span><span class="w">    </span>
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>
